@@ -9,7 +9,7 @@ const dbConnection = require("./models"); // loads our connection to the mongo d
 const passport = require("./passport");
 const app = express();
 const http = require('http')
-const socketIO = require('socket.io')
+const socket = require('socket.io')();
 const PORT = process.env.PORT || 8080;
 const path = require("path")
 
@@ -82,8 +82,20 @@ app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });
 
+//Socket.io
+io = socket(server);
+
+io.on('connection'), (socket) => {
+	console.log("SOCKET ID", socket.id);
+
+	socket.on("SEND_MESSAGE", function(data) {
+		io.emit("RECEIVE_MESSAGE", data);
+	})
+}
+
+
 
 // Start the API server
-app.listen(PORT, function () {
+server = app.listen(PORT, function () {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });

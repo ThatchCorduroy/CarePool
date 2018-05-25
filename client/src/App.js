@@ -27,7 +27,7 @@ import API from "./utils/API";
 import AddGuardCard from "./components/PatsTempComponents/AddGuardCard"
 import AddTeacherCard from "./components/PatsTempComponents/AddTeacherCard"
 import Modal from "./components/Modal";
-//import socketIOClient from "socket.io-client";
+import io from "socket.io-client";
 
 
 
@@ -60,11 +60,14 @@ class App extends Component {
 		//endpoint: "localhose:8080"
 	}
 
-	// send = () => {
-	// 	const socket = socketIOClient(this.state)
+	socket = io('localhost:8080');
 
-	// 	socket.emit('change color', 'red')
-	// }
+	sendMessage = event => {
+		event.preventDefault();
+		this.socket.emit('SEND_MESSAGE', {
+			something: "message!!!!!!!!!!"
+		})
+	}
 
 	componentDidMount() {
 		axios.get('/auth/user').then(response => {
