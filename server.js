@@ -38,7 +38,19 @@ app.use(passport.session()) // will call the deserializeUser
 app.use(bodyParser.urlencoded({ extended: true, limit: '3mb', parameterLimit: 3000 }));
 app.use(bodyParser.json({ limit: '3mb' }));
 // Serve up static assets
-app.use(express.static("client/public"));
+//app.use(express.static("client/public"));
+// ... other imports
+//const path = require("path")
+
+// ... other app.use middleware setups
+app.use(express.static(path.join(__dirname, "client", "build")))
+
+// ...
+// Right before your app.listen(), add this:
+app.get("*", (req, res) => {  
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
+
 // Add routes, both API and view
 app.use(routes);
 
@@ -65,6 +77,9 @@ app.use(routes);
 
 // 	})
 // })
+app.get("*", (req, res) => {  
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
 
 
 // Start the API server
