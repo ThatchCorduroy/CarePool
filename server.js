@@ -82,6 +82,11 @@ app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });
 
+// Start the API server
+server = app.listen(PORT, function () {
+  console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
+});
+
 //Socket.io
 io = socket(server);
 
@@ -92,10 +97,3 @@ io.on('connection'), (socket) => {
 		io.emit("RECEIVE_MESSAGE", data);
 	})
 }
-
-
-
-// Start the API server
-server = app.listen(PORT, function () {
-  console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
-});
