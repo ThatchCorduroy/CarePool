@@ -44,15 +44,15 @@ app.use(routes);
 
 // Connect to the Mongo DB
 //mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/carpoolGuardian");
-console.log("DIRNAME", __dirname);
-app.get("/*", function (req, res) {
-  console.log("DIRNAME", __dirname);
-  res.sendFile(path.join(__dirname, "client/index.html"));
-});
+// console.log("DIRNAME", __dirname);
+// app.get("/*", function (req, res) {
+//   console.log("DIRNAME", __dirname);
+//   res.sendFile(path.join(__dirname, "client/public/index.html"));
+// });
 
-app.post("/createFaceSet", function (req, res) {
-  console.log(req.body);
-});
+// app.post("/createFaceSet", function (req, res) {
+//   console.log(req.body);
+// });
 
 // Socket.io
 // const server = http.createServer(app)
