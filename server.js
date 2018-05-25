@@ -9,7 +9,7 @@ const dbConnection = require("./models"); // loads our connection to the mongo d
 const passport = require("./passport");
 const app = express();
 const http = require('http')
-const socket = require('socket.io')();
+const socket = require('socket.io');
 const PORT = process.env.PORT || 8080;
 const path = require("path")
 
